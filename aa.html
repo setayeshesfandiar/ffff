@@ -1,0 +1,187 @@
+ <!DOCTYPE html>
+<html lang="fa">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Amir 💘</title>
+
+<style>
+body{
+    margin:0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg,#14001f,#3d005e,#ff008c);
+    text-align:center;
+    overflow:hidden;
+    color:white;
+}
+
+.container{
+    margin-top:80px;
+    position:relative;
+    z-index:2;
+}
+
+h1{
+    font-size:26px;
+    padding:0 20px;
+}
+
+button{
+    padding:12px 25px;
+    font-size:16px;
+    border:none;
+    border-radius:30px;
+    cursor:pointer;
+    margin:10px;
+    transition:0.3s;
+}
+
+.yes{ background:#ff2e93; color:white; box-shadow:0 0 15px #ff2e93; }
+.no{ background:#444; color:white; position:absolute; }
+.crazy{ 
+    background:#ff7ac6; 
+    color:white; 
+    display:block; 
+    margin:50px auto 0 auto;
+}
+
+.popup{
+    position:fixed;
+    top:20px;
+    left:50%;
+    transform:translateX(-50%);
+    background:white;
+    color:black;
+    padding:12px 20px;
+    border-radius:20px;
+    display:none;
+    z-index:5;
+}
+
+/* قلب های متحرک */
+.heart{
+    position:fixed;
+    color:#ff4da6;
+    font-size:22px;
+    animation:fall linear infinite;
+}
+
+@keyframes fall{
+    0%{transform:translateY(-10vh);}
+    100%{transform:translateY(110vh);}
+}
+
+/* صفحه نهایی */
+.funPage{
+    display:none;
+    height:100vh;
+    background:linear-gradient(45deg,#ff008c,#ffcd1e,#00f2ff);
+    animation:bgmove 6s infinite alternate;
+}
+
+@keyframes bgmove{
+    0%{filter:hue-rotate(0deg);}
+    100%{filter:hue-rotate(60deg);}
+}
+</style>
+</head>
+<body>
+
+<!-- 🎵 آهنگ خودت -->
+<audio id="music" loop>
+<source src="yadeteh.mp3" type="audio/mp3">
+</audio>
+
+<div class="popup" id="popup"></div>
+
+<div class="container" id="mainPage">
+<h1>امیــــــر 😭💖<br>دوستم داری؟</h1>
+
+<button class="yes" id="yesBtn">آره 😍</button>
+<button class="no" id="noBtn">نه 😐</button>
+
+<button class="crazy" id="crazyBtn">دوستت ندارم، دیوونتم 🤭</button>
+</div>
+
+<div class="container" id="secondPage" style="display:none;">
+<h1>خب حالا ولنتاینِ من میشییییی؟ 🌝<br>عوضش چیزای خوشمزه میدم بهت 😋🍫</h1>
+<button class="yes" id="yes2">آره 😎</button>
+<button class="no" id="no2">نه 😒</button>
+</div>
+
+<div class="funPage" id="funPage">
+<h1 style="padding-top:120px;">آفرررررین مینی مینیِ من 🍒💘</h1>
+<h2>امیــــــر عاشقتممممممم 😭💕</h2>
+</div>
+
+<script>
+let noCount = 0;
+let yesCount = 0;
+
+const music = document.getElementById("music");
+
+/* پلی شدن موزیک بعد اولین لمس */
+document.body.addEventListener("click", function startMusic(){
+    music.play();
+    document.body.removeEventListener("click", startMusic);
+});
+
+function showPopup(text){
+    const popup = document.getElementById("popup");
+    popup.innerText = text;
+    popup.style.display="block";
+    setTimeout(()=>{popup.style.display="none";},2000);
+}
+
+function moveButton(btn){
+    btn.style.top = Math.random()*80 + "%";
+    btn.style.left = Math.random()*80 + "%";
+}
+
+document.getElementById("noBtn").onclick = function(){
+    noCount++;
+    if(noCount < 4){
+        moveButton(this);
+        showPopup("اگر جرات داری دوباره بزن رو نه 😏");
+    }else{
+        showPopup("من که میدونم عاشقمییی 😭💘");
+    }
+}
+
+document.getElementById("yesBtn").onclick = function(){
+    yesCount++;
+    if(yesCount < 3){
+        moveButton(this);
+        showPopup("عشقم گزینه های دیگه رو هم یه نگاه کننننن 🤭");
+    }
+}
+
+document.getElementById("crazyBtn").onclick = function(){
+    showPopup("آفرررررین مینی مینیِ من 🍒");
+    setTimeout(()=>{
+        document.getElementById("mainPage").style.display="none";
+        document.getElementById("secondPage").style.display="block";
+    },1500);
+}
+
+document.getElementById("yes2").onclick = function(){
+    document.getElementById("secondPage").style.display="none";
+    document.getElementById("funPage").style.display="block";
+}
+
+document.getElementById("no2").onclick = function(){
+    showPopup("چاره ای نداری 😌 باید آره رو بزنی");
+}/* تولید قلب های متحرک */
+setInterval(()=>{
+    const heart = document.createElement("div");
+    heart.className="heart";
+    heart.innerHTML="💖";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.animationDuration=(3+Math.random()*3)+"s";
+    document.body.appendChild(heart);
+    setTimeout(()=>{heart.remove();},6000);
+},300);
+</script>
+
+</body>
+</html>
